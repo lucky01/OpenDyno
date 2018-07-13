@@ -1,0 +1,1041 @@
+---------------------------------------------
+AVR ASSEMBLER LISTING
+Line    Address Opcode  Instruction
+---------------------------------------------
+0001    000000          ; Compiled with: AVR Simulator IDE v2.29
+0002    000000          ; Microcontroller model: ATtiny2313
+0003    000000          ; Clock frequency: 4.0MHz
+0004    000000          ;
+0005    000000          .EQU    XHL = 0x01A
+0006    000000          .EQU    ZHL = 0x01E
+0007    000000          .EQU    R1716 = 0x010
+0008    000000          .EQU    R1918 = 0x012
+0009    000000          .EQU    R2120 = 0x014
+0010    000000          .EQU    R19181716 = 0x010
+0011    000000          ;       The address of 'bttimeout' (word) (global) is 0x067
+0012    000000          ;       The address of 'pulsedisp' (bit) (global) is 0x019,0
+0013    000000          ;       The address of 'diagdisp' (word) (global) is 0x069
+0014    000000          ;       The address of 'rpm' (word) (global) is 0x071
+0015    000000          ;       The address of 'rpmperiod' (word) (global) is 0x00A
+0016    000000          ;       The address of 'rpmout' (word) (global) is 0x064
+0017    000000          ;       The address of 'rpmhighwait' (word) (global) is 0x01C
+0018    000000          ;       The address of 'rpmlow' (word) (global) is 0x00C
+0019    000000          ;       The address of 'pulseperiod' (word) (global) is 0x060
+0020    000000          ;       The address of 'pulseout' (word) (global) is 0x06B
+0021    000000          ;       The address of 'pulsehighwait' (bit) (global) is 0x019,1
+0022    000000          ;       The address of 'pulselow' (word) (global) is 0x017
+0023    000000          ;       The address of 'charinput' (byte) (global) is 0x066
+0024    000000          ;       The address of 'mode' (byte) (global) is 0x00E
+0025    000000          ;       The address of 'getlambda' (bit) (global) is 0x019,2
+0026    000000          ;       The address of 'lambdaperiod' (word) (global) is 0x062
+0027    000000          ;       The address of 'lambdawait' (word) (global) is 0x06D
+0028    000000          ;       The address of 'lambdaout' (word) (global) is 0x06F
+0029    000000          ;       The address of 'bt1' (bit) (global) is 0x036,4
+0030    000000          ;       The address of 'bt2' (bit) (global) is 0x036,5
+0031    000000          ;       The address of 'bt3' (bit) (global) is 0x036,6
+0032    000000          ;       The address of 'pulse' (bit) (global) is 0x030,2
+0033    000000          ;       The address of 'led' (bit) (global) is 0x032,4
+0034    000000          ;       The address of 'spark' (bit) (global) is 0x030,3
+0035    000000          ;       The address of 'lambda' (bit) (global) is 0x028,5
+0036    000000          .ORG	0x000000
+0037    000000  C015    	RJMP L0002
+0038    000001          .ORG	0x000004
+0039    000004  C215    	RJMP L0003
+0040    000005          L0004:
+0041    000005  91FF    	POP R31
+0042    000006  91EF    	POP R30
+0043    000007  91BF    	POP R27
+0044    000008  91AF    	POP R26
+0045    000009  916F    	POP R22
+0046    00000A  915F    	POP R21
+0047    00000B  914F    	POP R20
+0048    00000C  913F    	POP R19
+0049    00000D  912F    	POP R18
+0050    00000E  911F    	POP R17
+0051    00000F  910F    	POP R16
+0052    000010  90FF    	POP R15
+0053    000011  900F    	POP R0
+0054    000012  910F    	POP R16
+0055    000013  BF0F    	OUT SREG,R16
+0056    000014  910F    	POP R16
+0057    000015  9518    	RETI
+0058    000016          L0002:
+0059    000016  24FF    	CLR R15
+0060    000017  ED0F    	LDI R16,low RAMEND
+0061    000018  BF0D    	OUT SPL,R16
+0062    000019  C000    	RJMP L0005
+0063    00001A          ; User code start
+0064    00001A          L0005:
+0065    00001A          ; 1: Dim bttimeout As Word
+0066    00001A          ; 2: bttimeout = 0
+0067    00001A  92F0    	STS 0x067,R15
+0067    00001B  0067
+0068    00001C  92F0    	STS 0x068,R15
+0068    00001D  0068
+0069    00001E          ; 3: 
+0070    00001E          ; 4: Dim pulsedisp As Bit
+0071    00001E          ; 5: Dim diagdisp As Word
+0072    00001E          ; 6: 
+0073    00001E          ; 7: pulsedisp = False
+0074    00001E  7F9E    	CBR 0x019,1
+0075    00001F          ; 8: diagdisp = 0
+0076    00001F  92F0    	STS 0x069,R15
+0076    000020  0069
+0077    000021  92F0    	STS 0x06A,R15
+0077    000022  006A
+0078    000023          ; 9: 
+0079    000023          ; 10: Dim rpm As Word
+0080    000023          ; 11: Dim rpmperiod As Word
+0081    000023          ; 12: Dim rpmout As Word
+0082    000023          ; 13: Dim rpmhighwait As Word
+0083    000023          ; 14: Dim rpmlow As Word
+0084    000023          ; 15: 
+0085    000023          ; 16: rpm = 0
+0086    000023  92F0    	STS 0x071,R15
+0086    000024  0071
+0087    000025  92F0    	STS 0x072,R15
+0087    000026  0072
+0088    000027          ; 17: rpmperiod = 0
+0089    000027  2CAF    	MOV 0x00A,R15
+0090    000028  2CBF    	MOV 0x00B,R15
+0091    000029          ; 18: rpmout = 0
+0092    000029  92F0    	STS 0x064,R15
+0092    00002A  0064
+0093    00002B  92F0    	STS 0x065,R15
+0093    00002C  0065
+0094    00002D          ; 19: rpmhighwait = 0
+0095    00002D  E0C0    	LDI 0x01C,0x00
+0096    00002E  E0D0    	LDI 0x01D,0x00
+0097    00002F          ; 20: rpmlow = 0
+0098    00002F  2CCF    	MOV 0x00C,R15
+0099    000030  2CDF    	MOV 0x00D,R15
+0100    000031          ; 21: 
+0101    000031          ; 22: Dim pulseperiod As Word
+0102    000031          ; 23: Dim pulseout As Word
+0103    000031          ; 24: Dim pulsehighwait As Bit
+0104    000031          ; 25: Dim pulselow As Word
+0105    000031          ; 26: 
+0106    000031          ; 27: pulseout = 0
+0107    000031  92F0    	STS 0x06B,R15
+0107    000032  006B
+0108    000033  92F0    	STS 0x06C,R15
+0108    000034  006C
+0109    000035          ; 28: pulseperiod = 0
+0110    000035  92F0    	STS 0x060,R15
+0110    000036  0060
+0111    000037  92F0    	STS 0x061,R15
+0111    000038  0061
+0112    000039          ; 29: pulsehighwait = 0
+0113    000039  7F9D    	CBR 0x019,2
+0114    00003A          ; 30: pulselow = 0
+0115    00003A  E070    	LDI 0x017,0x00
+0116    00003B  E080    	LDI 0x018,0x00
+0117    00003C          ; 31: 
+0118    00003C          ; 32: Dim charinput As Byte
+0119    00003C          ; 33: charinput = 0
+0120    00003C  92F0    	STS 0x066,R15
+0120    00003D  0066
+0121    00003E          ; 34: Dim mode As Byte
+0122    00003E          ; 35: mode = 0
+0123    00003E  2CEF    	MOV 0x00E,R15
+0124    00003F          ; 36: 
+0125    00003F          ; 37: ConfigPin PORTD.2 = Input  'pulse
+0126    00003F  988A    	CBI DDRD,2
+0127    000040          ; 38: ConfigPin PORTD.3 = Input  'spark
+0128    000040  988B    	CBI DDRD,3
+0129    000041          ; 39: ConfigPin PORTD.4 = Output  'LED
+0130    000041  9A8C    	SBI DDRD,4
+0131    000042          ; 40: ConfigPin PORTB.0 = Input  'reference
+0132    000042  98B8    	CBI DDRB,0
+0133    000043          ; 41: ConfigPin PORTB.1 = Input  'lambda input
+0134    000043  98B9    	CBI DDRB,1
+0135    000044          ; 42: ConfigPin PORTB.2 = Output  'load Capacitor
+0136    000044  9ABA    	SBI DDRB,2
+0137    000045          ; 43: ConfigPin PORTB.4 = Input  'button 1
+0138    000045  98BC    	CBI DDRB,4
+0139    000046          ; 44: ConfigPin PORTB.5 = Input  'button 2
+0140    000046  98BD    	CBI DDRB,5
+0141    000047          ; 45: ConfigPin PORTB.6 = Input  'button 3
+0142    000047  98BE    	CBI DDRB,6
+0143    000048          ; 46: 
+0144    000048          ; 47: PORTD.2 = 0
+0145    000048  9892    	CBI PORTD,2
+0146    000049          ; 48: PORTD.3 = 0
+0147    000049  9893    	CBI PORTD,3
+0148    00004A          ; 49: PORTB.0 = 0
+0149    00004A  98C0    	CBI PORTB,0
+0150    00004B          ; 50: PORTB.1 = 0
+0151    00004B  98C1    	CBI PORTB,1
+0152    00004C          ; 51: PORTB.4 = 0
+0153    00004C  98C4    	CBI PORTB,4
+0154    00004D          ; 52: PORTB.5 = 0
+0155    00004D  98C5    	CBI PORTB,5
+0156    00004E          ; 53: PORTB.6 = 0
+0157    00004E  98C6    	CBI PORTB,6
+0158    00004F          ; 54: 
+0159    00004F          ; 55: Symbol bt1 = PINB.4
+0160    00004F          ; 56: Symbol bt2 = PINB.5
+0161    00004F          ; 57: Symbol bt3 = PINB.6
+0162    00004F          ; 58: Symbol pulse = PIND.2
+0163    00004F          ; 59: Symbol led = PORTD.4
+0164    00004F          ; 60: Symbol spark = PIND.3
+0165    00004F          ; 61: Symbol lambda = ACSR.ACO
+0166    00004F          ; 62: 
+0167    00004F          ; 63: ACSR.ACD = 0
+0168    00004F  9847    	CBI ACSR,7
+0169    000050          ; 64: Disable ACI
+0170    000050  9843    	CBI ACSR,3
+0171    000051          ; 65: 
+0172    000051          ; 66: 'set timer parameters
+0173    000051          ; 67: TIMSK.OCIE1A = 1
+0174    000051  9468    	SET
+0175    000052  B709    	IN R16,TIMSK
+0176    000053  F906    	BLD R16,6
+0177    000054  BF09    	OUT TIMSK,R16
+0178    000055          ; 68: TCCR1B.CS12 = 0
+0179    000055  94E8    	CLT
+0180    000056  B50E    	IN R16,TCCR1B
+0181    000057  F902    	BLD R16,2
+0182    000058  BD0E    	OUT TCCR1B,R16
+0183    000059          ; 69: TCCR1B.CS11 = 0
+0184    000059  94E8    	CLT
+0185    00005A  B50E    	IN R16,TCCR1B
+0186    00005B  F901    	BLD R16,1
+0187    00005C  BD0E    	OUT TCCR1B,R16
+0188    00005D          ; 70: TCCR1B.CS10 = 1
+0189    00005D  9468    	SET
+0190    00005E  B50E    	IN R16,TCCR1B
+0191    00005F  F900    	BLD R16,0
+0192    000060  BD0E    	OUT TCCR1B,R16
+0193    000061          ; 71: TCCR1B.CTC1 = 1
+0194    000061  9468    	SET
+0195    000062  B50E    	IN R16,TCCR1B
+0196    000063  F903    	BLD R16,3
+0197    000064  BD0E    	OUT TCCR1B,R16
+0198    000065          ; 72: OCR1AH = $00
+0199    000065  BCFB    	OUT OCR1AH,R15
+0200    000066          ; 73: OCR1AL = $63
+0201    000066  E603    	LDI R16,0x63
+0202    000067  BD0A    	OUT OCR1AL,R16
+0203    000068          ; 74: Enable OC1A
+0204    000068  9468    	SET
+0205    000069  B709    	IN R16,TIMSK
+0206    00006A  F906    	BLD R16,6
+0207    00006B  BF09    	OUT TIMSK,R16
+0208    00006C          ; 75: Enable
+0209    00006C  9478    	SEI
+0210    00006D          ; 76: 
+0211    00006D          ; 77: 
+0212    00006D          ; 78: Dim getlambda As Bit
+0213    00006D          ; 79: Dim lambdaperiod As Word
+0214    00006D          ; 80: Dim lambdawait As Word
+0215    00006D          ; 81: Dim lambdaout As Word
+0216    00006D          ; 82: 
+0217    00006D          ; 83: getlambda = False
+0218    00006D  7F9B    	CBR 0x019,4
+0219    00006E          ; 84: lambdaperiod = 0
+0220    00006E  92F0    	STS 0x062,R15
+0220    00006F  0062
+0221    000070  92F0    	STS 0x063,R15
+0221    000071  0063
+0222    000072          ; 85: lambdawait = 0
+0223    000072  92F0    	STS 0x06D,R15
+0223    000073  006D
+0224    000074  92F0    	STS 0x06E,R15
+0224    000075  006E
+0225    000076          ; 86: lambdaout = 0
+0226    000076  92F0    	STS 0x06F,R15
+0226    000077  006F
+0227    000078  92F0    	STS 0x070,R15
+0227    000079  0070
+0228    00007A          ; 87: 
+0229    00007A          ; 88: Hseropen 57600
+0230    00007A          ; exact baud rate achieved = 55555.55; bit period = 18µs; baud rate error = 3.54%
+0231    00007A  E008    	LDI R16,0x08
+0232    00007B  B909    	OUT UBRRL,R16
+0233    00007C  E000    	LDI R16,0x00
+0234    00007D  B902    	OUT UBRRH,R16
+0235    00007E  E402    	LDI R16,0x42
+0236    00007F  B90B    	OUT UCSRA,R16
+0237    000080  E006    	LDI R16,0x06
+0238    000081  B903    	OUT UCSRC,R16
+0239    000082  E108    	LDI R16,0x18
+0240    000083  B90A    	OUT UCSRB,R16
+0241    000084          ; 89: led = True
+0242    000084  9A94    	SBI PORTD,4
+0243    000085          ; 90: 
+0244    000085          ; 91: main_loop:
+0245    000085          L0001:
+0246    000085          ; 92: 
+0247    000085          ; 93: Hserget charinput
+0248    000085  2DFF    	MOV R31,R15
+0249    000086  995F    	SBIC UCSRA,RXC
+0250    000087  B1FC    	IN R31,UDR
+0251    000088  93F0    	STS 0x066,R31
+0251    000089  0066
+0252    00008A          ; 94: 
+0253    00008A          ; 95: Select Case charinput
+0254    00008A          ; 96: Case "0"
+0255    00008A  9100    	LDS R16,0x066
+0255    00008B  0066
+0256    00008C  E310    	LDI R17,0x30
+0257    00008D  1301    	CPSE R16,R17
+0258    00008E  C00D    	RJMP L0006
+0259    00008F          ; 97: mode = 0
+0260    00008F  2CEF    	MOV 0x00E,R15
+0261    000090          ; 98: Hserout "STOP", Lf
+0262    000090  E5F3    	LDI R31,0x53
+0263    000091  D22C    	RCALL HS01
+0264    000092  E5F4    	LDI R31,0x54
+0265    000093  D22A    	RCALL HS01
+0266    000094  E4FF    	LDI R31,0x4F
+0267    000095  D228    	RCALL HS01
+0268    000096  E5F0    	LDI R31,0x50
+0269    000097  D226    	RCALL HS01
+0270    000098  E0FA    	LDI R31,0x0A
+0271    000099  D224    	RCALL HS01
+0272    00009A          ; 99: led = True
+0273    00009A  9A94    	SBI PORTD,4
+0274    00009B          ; 100: Case "1"
+0275    00009B  C025    	RJMP L0007
+0276    00009C          L0006:
+0277    00009C  9100    	LDS R16,0x066
+0277    00009D  0066
+0278    00009E  E311    	LDI R17,0x31
+0279    00009F  1301    	CPSE R16,R17
+0280    0000A0  C00E    	RJMP L0008
+0281    0000A1          ; 101: mode = 1
+0282    0000A1  E001    	LDI R16,0x01
+0283    0000A2  2EE0    	MOV 0x00E,R16
+0284    0000A3          ; 102: Hserout "DATA", Lf
+0285    0000A3  E4F4    	LDI R31,0x44
+0286    0000A4  D219    	RCALL HS01
+0287    0000A5  E4F1    	LDI R31,0x41
+0288    0000A6  D217    	RCALL HS01
+0289    0000A7  E5F4    	LDI R31,0x54
+0290    0000A8  D215    	RCALL HS01
+0291    0000A9  E4F1    	LDI R31,0x41
+0292    0000AA  D213    	RCALL HS01
+0293    0000AB  E0FA    	LDI R31,0x0A
+0294    0000AC  D211    	RCALL HS01
+0295    0000AD          ; 103: led = False
+0296    0000AD  9894    	CBI PORTD,4
+0297    0000AE          ; 104: Case "2"
+0298    0000AE  C012    	RJMP L0009
+0299    0000AF          L0008:
+0300    0000AF  9100    	LDS R16,0x066
+0300    0000B0  0066
+0301    0000B1  E312    	LDI R17,0x32
+0302    0000B2  1301    	CPSE R16,R17
+0303    0000B3  C00D    	RJMP L0010
+0304    0000B4          ; 105: mode = 2
+0305    0000B4  E002    	LDI R16,0x02
+0306    0000B5  2EE0    	MOV 0x00E,R16
+0307    0000B6          ; 106: Hserout "DIAG", Lf
+0308    0000B6  E4F4    	LDI R31,0x44
+0309    0000B7  D206    	RCALL HS01
+0310    0000B8  E4F9    	LDI R31,0x49
+0311    0000B9  D204    	RCALL HS01
+0312    0000BA  E4F1    	LDI R31,0x41
+0313    0000BB  D202    	RCALL HS01
+0314    0000BC  E4F7    	LDI R31,0x47
+0315    0000BD  D200    	RCALL HS01
+0316    0000BE  E0FA    	LDI R31,0x0A
+0317    0000BF  D1FE    	RCALL HS01
+0318    0000C0          ; 107: led = False
+0319    0000C0  9894    	CBI PORTD,4
+0320    0000C1          ; 108: EndSelect
+0321    0000C1          L0010:
+0322    0000C1          L0009:
+0323    0000C1          L0007:
+0324    0000C1          ; 109: 
+0325    0000C1          ; 110: If bttimeout = 0 Then
+0326    0000C1  9100    	LDS R16,0x067
+0326    0000C2  0067
+0327    0000C3  9110    	LDS R17,0x068
+0327    0000C4  0068
+0328    0000C5  E020    	LDI R18,0x00
+0329    0000C6  E030    	LDI R19,0x00
+0330    0000C7  1702    	CP R16,R18
+0331    0000C8  0713    	CPC R17,R19
+0332    0000C9  B74F    	IN R20,SREG
+0333    0000CA  FF41    	SBRS R20,SREG_Z
+0334    0000CB  C025    	RJMP L0011
+0335    0000CC          ; 111: If bt1 = 0 Then
+0336    0000CC  99B4    	SBIC PINB,4
+0337    0000CD  C008    	RJMP L0012
+0338    0000CE          ; 112: Hserout "BT1", Lf
+0339    0000CE  E4F2    	LDI R31,0x42
+0340    0000CF  D1EE    	RCALL HS01
+0341    0000D0  E5F4    	LDI R31,0x54
+0342    0000D1  D1EC    	RCALL HS01
+0343    0000D2  E3F1    	LDI R31,0x31
+0344    0000D3  D1EA    	RCALL HS01
+0345    0000D4  E0FA    	LDI R31,0x0A
+0346    0000D5  D1E8    	RCALL HS01
+0347    0000D6          ; 113: Endif
+0348    0000D6          L0012:
+0349    0000D6          ; 114: If bt2 = 0 Then
+0350    0000D6  99B5    	SBIC PINB,5
+0351    0000D7  C008    	RJMP L0013
+0352    0000D8          ; 115: Hserout "BT2", Lf
+0353    0000D8  E4F2    	LDI R31,0x42
+0354    0000D9  D1E4    	RCALL HS01
+0355    0000DA  E5F4    	LDI R31,0x54
+0356    0000DB  D1E2    	RCALL HS01
+0357    0000DC  E3F2    	LDI R31,0x32
+0358    0000DD  D1E0    	RCALL HS01
+0359    0000DE  E0FA    	LDI R31,0x0A
+0360    0000DF  D1DE    	RCALL HS01
+0361    0000E0          ; 116: Endif
+0362    0000E0          L0013:
+0363    0000E0          ; 117: If bt3 = 0 Then
+0364    0000E0  99B6    	SBIC PINB,6
+0365    0000E1  C008    	RJMP L0014
+0366    0000E2          ; 118: Hserout "BT3", Lf
+0367    0000E2  E4F2    	LDI R31,0x42
+0368    0000E3  D1DA    	RCALL HS01
+0369    0000E4  E5F4    	LDI R31,0x54
+0370    0000E5  D1D8    	RCALL HS01
+0371    0000E6  E3F3    	LDI R31,0x33
+0372    0000E7  D1D6    	RCALL HS01
+0373    0000E8  E0FA    	LDI R31,0x0A
+0374    0000E9  D1D4    	RCALL HS01
+0375    0000EA          ; 119: Endif
+0376    0000EA          L0014:
+0377    0000EA          ; 120: bttimeout = 5000
+0378    0000EA  E808    	LDI R16,0x88
+0379    0000EB  9300    	STS 0x067,R16
+0379    0000EC  0067
+0380    0000ED  E103    	LDI R16,0x13
+0381    0000EE  9300    	STS 0x068,R16
+0381    0000EF  0068
+0382    0000F0          ; 121: Else
+0383    0000F0  C00C    	RJMP L0015
+0384    0000F1          L0011:
+0385    0000F1          ; 122: bttimeout = bttimeout - 1
+0386    0000F1  9100    	LDS R16,0x067
+0386    0000F2  0067
+0387    0000F3  9110    	LDS R17,0x068
+0387    0000F4  0068
+0388    0000F5  E021    	LDI R18,0x01
+0389    0000F6  E030    	LDI R19,0x00
+0390    0000F7  1B02    	SUB R16,R18
+0391    0000F8  0B13    	SBC R17,R19
+0392    0000F9  9300    	STS 0x067,R16
+0392    0000FA  0067
+0393    0000FB  9310    	STS 0x068,R17
+0393    0000FC  0068
+0394    0000FD          ; 123: Endif
+0395    0000FD          L0015:
+0396    0000FD          ; 124: 
+0397    0000FD          ; 125: 
+0398    0000FD          ; 126: If pulselow >= 60000 Then
+0399    0000FD  2F07    	MOV R16,0x017
+0400    0000FE  2F18    	MOV R17,0x018
+0401    0000FF  E620    	LDI R18,0x60
+0402    000100  EE3A    	LDI R19,0xEA
+0403    000101  1702    	CP R16,R18
+0404    000102  0713    	CPC R17,R19
+0405    000103  B74F    	IN R20,SREG
+0406    000104  FD40    	SBRC R20,SREG_C
+0407    000105  C00A    	RJMP L0016
+0408    000106          ; 127: pulselow = 60000
+0409    000106  E670    	LDI 0x017,0x60
+0410    000107  EE8A    	LDI 0x018,0xEA
+0411    000108          ; 128: pulseperiod = 0
+0412    000108  92F0    	STS 0x060,R15
+0412    000109  0060
+0413    00010A  92F0    	STS 0x061,R15
+0413    00010B  0061
+0414    00010C          ; 129: pulseout = 0
+0415    00010C  92F0    	STS 0x06B,R15
+0415    00010D  006B
+0416    00010E  92F0    	STS 0x06C,R15
+0416    00010F  006C
+0417    000110          ; 130: Endif
+0418    000110          L0016:
+0419    000110          ; 131: 
+0420    000110          ; 132: If rpmlow >= 60000 Then
+0421    000110  2D0C    	MOV R16,0x00C
+0422    000111  2D1D    	MOV R17,0x00D
+0423    000112  E620    	LDI R18,0x60
+0424    000113  EE3A    	LDI R19,0xEA
+0425    000114  1702    	CP R16,R18
+0426    000115  0713    	CPC R17,R19
+0427    000116  B74F    	IN R20,SREG
+0428    000117  FD40    	SBRC R20,SREG_C
+0429    000118  C00A    	RJMP L0017
+0430    000119          ; 133: rpmout = 0
+0431    000119  92F0    	STS 0x064,R15
+0431    00011A  0064
+0432    00011B  92F0    	STS 0x065,R15
+0432    00011C  0065
+0433    00011D          ; 134: rpmperiod = 0
+0434    00011D  2CAF    	MOV 0x00A,R15
+0435    00011E  2CBF    	MOV 0x00B,R15
+0436    00011F          ; 135: rpmlow = 60000
+0437    00011F  E600    	LDI R16,0x60
+0438    000120  2EC0    	MOV 0x00C,R16
+0439    000121  EE0A    	LDI R16,0xEA
+0440    000122  2ED0    	MOV 0x00D,R16
+0441    000123          ; 136: Endif
+0442    000123          L0017:
+0443    000123          ; 137: 
+0444    000123          ; 138: If lambdaperiod >= 50000 Then
+0445    000123  9100    	LDS R16,0x062
+0445    000124  0062
+0446    000125  9110    	LDS R17,0x063
+0446    000126  0063
+0447    000127  E520    	LDI R18,0x50
+0448    000128  EC33    	LDI R19,0xC3
+0449    000129  1702    	CP R16,R18
+0450    00012A  0713    	CPC R17,R19
+0451    00012B  B74F    	IN R20,SREG
+0452    00012C  FD40    	SBRC R20,SREG_C
+0453    00012D  C00A    	RJMP L0018
+0454    00012E          ; 139: lambdaperiod = 50000
+0455    00012E  E500    	LDI R16,0x50
+0456    00012F  9300    	STS 0x062,R16
+0456    000130  0062
+0457    000131  EC03    	LDI R16,0xC3
+0458    000132  9300    	STS 0x063,R16
+0458    000133  0063
+0459    000134          ; 140: lambdaout = 0
+0460    000134  92F0    	STS 0x06F,R15
+0460    000135  006F
+0461    000136  92F0    	STS 0x070,R15
+0461    000137  0070
+0462    000138          ; 141: Endif
+0463    000138          L0018:
+0464    000138          ; 142: 
+0465    000138          ; 143: Select Case mode
+0466    000138          ; 144: Case 1
+0467    000138  2D0E    	MOV R16,0x00E
+0468    000139  E011    	LDI R17,0x01
+0469    00013A  1301    	CPSE R16,R17
+0470    00013B  C047    	RJMP L0019
+0471    00013C          ; 145: If pulsedisp = True And pulseperiod < 60000 Then
+0472    00013C  FF90    	SBRS 0x019,0
+0473    00013D  C044    	RJMP L0020
+0474    00013E  9100    	LDS R16,0x060
+0474    00013F  0060
+0475    000140  9110    	LDS R17,0x061
+0475    000141  0061
+0476    000142  E620    	LDI R18,0x60
+0477    000143  EE3A    	LDI R19,0xEA
+0478    000144  1702    	CP R16,R18
+0479    000145  0713    	CPC R17,R19
+0480    000146  B74F    	IN R20,SREG
+0481    000147  FF40    	SBRS R20,SREG_C
+0482    000148  C039    	RJMP L0020
+0483    000149          ; 146: Toggle led
+0484    000149  9A84    	SBI PIND,4
+0485    00014A  9A8C    	SBI DDRD,4
+0486    00014B          ; 147: If rpmperiod > 240 And rpmperiod < 12000 Then
+0487    00014B  2D0A    	MOV R16,0x00A
+0488    00014C  2D1B    	MOV R17,0x00B
+0489    00014D  EF20    	LDI R18,0xF0
+0490    00014E  E030    	LDI R19,0x00
+0491    00014F  1720    	CP R18,R16
+0492    000150  0731    	CPC R19,R17
+0493    000151  B74F    	IN R20,SREG
+0494    000152  FF40    	SBRS R20,SREG_C
+0495    000153  C00D    	RJMP L0021
+0496    000154  2D0A    	MOV R16,0x00A
+0497    000155  2D1B    	MOV R17,0x00B
+0498    000156  EE20    	LDI R18,0xE0
+0499    000157  E23E    	LDI R19,0x2E
+0500    000158  1702    	CP R16,R18
+0501    000159  0713    	CPC R17,R19
+0502    00015A  B74F    	IN R20,SREG
+0503    00015B  FF40    	SBRS R20,SREG_C
+0504    00015C  C004    	RJMP L0021
+0505    00015D          ; 148: rpmout = rpmperiod
+0506    00015D  92A0    	STS 0x064,0x00A
+0506    00015E  0064
+0507    00015F  92B0    	STS 0x065,0x00B
+0507    000160  0065
+0508    000161          ; 149: Endif
+0509    000161          L0021:
+0510    000161          ; 150: Hserout #pulseperiod, ";", #rpmout, ";", #lambdaout, ";", Lf
+0511    000161  9070    	LDS 0x007,0x060
+0511    000162  0060
+0512    000163  9080    	LDS 0x008,0x061
+0512    000164  0061
+0513    000165  D125    	RCALL _append_lab_0001
+0514    000166  E0A1    	LDI XL,0x01
+0515    000167  E0B0    	LDI XH,0x00
+0516    000168  D15E    	RCALL HS21
+0517    000169  E3FB    	LDI R31,0x3B
+0518    00016A  D153    	RCALL HS01
+0519    00016B  9070    	LDS 0x007,0x064
+0519    00016C  0064
+0520    00016D  9080    	LDS 0x008,0x065
+0520    00016E  0065
+0521    00016F  D11B    	RCALL _append_lab_0001
+0522    000170  E0A1    	LDI XL,0x01
+0523    000171  E0B0    	LDI XH,0x00
+0524    000172  D154    	RCALL HS21
+0525    000173  E3FB    	LDI R31,0x3B
+0526    000174  D149    	RCALL HS01
+0527    000175  9070    	LDS 0x007,0x06F
+0527    000176  006F
+0528    000177  9080    	LDS 0x008,0x070
+0528    000178  0070
+0529    000179  D111    	RCALL _append_lab_0001
+0530    00017A  E0A1    	LDI XL,0x01
+0531    00017B  E0B0    	LDI XH,0x00
+0532    00017C  D14A    	RCALL HS21
+0533    00017D  E3FB    	LDI R31,0x3B
+0534    00017E  D13F    	RCALL HS01
+0535    00017F  E0FA    	LDI R31,0x0A
+0536    000180  D13D    	RCALL HS01
+0537    000181          ; 151: pulsedisp = False
+0538    000181  7F9E    	CBR 0x019,1
+0539    000182          ; 152: Endif
+0540    000182          L0020:
+0541    000182          ; 153: Case 2
+0542    000182  C06A    	RJMP L0022
+0543    000183          L0019:
+0544    000183  2D0E    	MOV R16,0x00E
+0545    000184  E012    	LDI R17,0x02
+0546    000185  1301    	CPSE R16,R17
+0547    000186  C066    	RJMP L0023
+0548    000187          ; 154: If diagdisp >= 1000 Then
+0549    000187  9100    	LDS R16,0x069
+0549    000188  0069
+0550    000189  9110    	LDS R17,0x06A
+0550    00018A  006A
+0551    00018B  EE28    	LDI R18,0xE8
+0552    00018C  E033    	LDI R19,0x03
+0553    00018D  1702    	CP R16,R18
+0554    00018E  0713    	CPC R17,R19
+0555    00018F  B74F    	IN R20,SREG
+0556    000190  FD40    	SBRC R20,SREG_C
+0557    000191  C050    	RJMP L0024
+0558    000192          ; 155: diagdisp = 0
+0559    000192  92F0    	STS 0x069,R15
+0559    000193  0069
+0560    000194  92F0    	STS 0x06A,R15
+0560    000195  006A
+0561    000196          ; 156: Toggle led
+0562    000196  9A84    	SBI PIND,4
+0563    000197  9A8C    	SBI DDRD,4
+0564    000198          ; 157: If rpmperiod > 200 And rpmperiod < 12000 Then
+0565    000198  2D0A    	MOV R16,0x00A
+0566    000199  2D1B    	MOV R17,0x00B
+0567    00019A  EC28    	LDI R18,0xC8
+0568    00019B  E030    	LDI R19,0x00
+0569    00019C  1720    	CP R18,R16
+0570    00019D  0731    	CPC R19,R17
+0571    00019E  B74F    	IN R20,SREG
+0572    00019F  FF40    	SBRS R20,SREG_C
+0573    0001A0  C00D    	RJMP L0025
+0574    0001A1  2D0A    	MOV R16,0x00A
+0575    0001A2  2D1B    	MOV R17,0x00B
+0576    0001A3  EE20    	LDI R18,0xE0
+0577    0001A4  E23E    	LDI R19,0x2E
+0578    0001A5  1702    	CP R16,R18
+0579    0001A6  0713    	CPC R17,R19
+0580    0001A7  B74F    	IN R20,SREG
+0581    0001A8  FF40    	SBRS R20,SREG_C
+0582    0001A9  C004    	RJMP L0025
+0583    0001AA          ; 158: rpmout = rpmperiod
+0584    0001AA  92A0    	STS 0x064,0x00A
+0584    0001AB  0064
+0585    0001AC  92B0    	STS 0x065,0x00B
+0585    0001AD  0065
+0586    0001AE          ; 159: Endif
+0587    0001AE          L0025:
+0588    0001AE          ; 160: If pulseperiod < 60000 Then
+0589    0001AE  9100    	LDS R16,0x060
+0589    0001AF  0060
+0590    0001B0  9110    	LDS R17,0x061
+0590    0001B1  0061
+0591    0001B2  E620    	LDI R18,0x60
+0592    0001B3  EE3A    	LDI R19,0xEA
+0593    0001B4  1702    	CP R16,R18
+0594    0001B5  0713    	CPC R17,R19
+0595    0001B6  B74F    	IN R20,SREG
+0596    0001B7  FF40    	SBRS R20,SREG_C
+0597    0001B8  C008    	RJMP L0026
+0598    0001B9          ; 161: pulseout = pulseperiod
+0599    0001B9  9100    	LDS R16,0x060
+0599    0001BA  0060
+0600    0001BB  9300    	STS 0x06B,R16
+0600    0001BC  006B
+0601    0001BD  9100    	LDS R16,0x061
+0601    0001BE  0061
+0602    0001BF  9300    	STS 0x06C,R16
+0602    0001C0  006C
+0603    0001C1          ; 162: Endif
+0604    0001C1          L0026:
+0605    0001C1          ; 163: Hserout #pulseout, ";", #rpmout, ";", #lambdaout, ";", Lf
+0606    0001C1  9070    	LDS 0x007,0x06B
+0606    0001C2  006B
+0607    0001C3  9080    	LDS 0x008,0x06C
+0607    0001C4  006C
+0608    0001C5  D0C5    	RCALL _append_lab_0001
+0609    0001C6  E0A1    	LDI XL,0x01
+0610    0001C7  E0B0    	LDI XH,0x00
+0611    0001C8  D0FE    	RCALL HS21
+0612    0001C9  E3FB    	LDI R31,0x3B
+0613    0001CA  D0F3    	RCALL HS01
+0614    0001CB  9070    	LDS 0x007,0x064
+0614    0001CC  0064
+0615    0001CD  9080    	LDS 0x008,0x065
+0615    0001CE  0065
+0616    0001CF  D0BB    	RCALL _append_lab_0001
+0617    0001D0  E0A1    	LDI XL,0x01
+0618    0001D1  E0B0    	LDI XH,0x00
+0619    0001D2  D0F4    	RCALL HS21
+0620    0001D3  E3FB    	LDI R31,0x3B
+0621    0001D4  D0E9    	RCALL HS01
+0622    0001D5  9070    	LDS 0x007,0x06F
+0622    0001D6  006F
+0623    0001D7  9080    	LDS 0x008,0x070
+0623    0001D8  0070
+0624    0001D9  D0B1    	RCALL _append_lab_0001
+0625    0001DA  E0A1    	LDI XL,0x01
+0626    0001DB  E0B0    	LDI XH,0x00
+0627    0001DC  D0EA    	RCALL HS21
+0628    0001DD  E3FB    	LDI R31,0x3B
+0629    0001DE  D0DF    	RCALL HS01
+0630    0001DF  E0FA    	LDI R31,0x0A
+0631    0001E0  D0DD    	RCALL HS01
+0632    0001E1          ; 164: Else
+0633    0001E1  C00B    	RJMP L0027
+0634    0001E2          L0024:
+0635    0001E2          ; 165: diagdisp = diagdisp + 1
+0636    0001E2  9100    	LDS R16,0x069
+0636    0001E3  0069
+0637    0001E4  9110    	LDS R17,0x06A
+0637    0001E5  006A
+0638    0001E6  9503    	INC R16
+0639    0001E7  F409    	BRNE PC+2
+0640    0001E8  9513    	INC R17
+0641    0001E9  9300    	STS 0x069,R16
+0641    0001EA  0069
+0642    0001EB  9310    	STS 0x06A,R17
+0642    0001EC  006A
+0643    0001ED          ; 166: Endif
+0644    0001ED          L0027:
+0645    0001ED          ; 167: 
+0646    0001ED          ; 168: EndSelect
+0647    0001ED          L0023:
+0648    0001ED          L0022:
+0649    0001ED          ; 169: 
+0650    0001ED          ; 170: If getlambda = False And lambdawait > 900 Then
+0651    0001ED  FD92    	SBRC 0x019,2
+0652    0001EE  C015    	RJMP L0028
+0653    0001EF  9100    	LDS R16,0x06D
+0653    0001F0  006D
+0654    0001F1  9110    	LDS R17,0x06E
+0654    0001F2  006E
+0655    0001F3  E824    	LDI R18,0x84
+0656    0001F4  E033    	LDI R19,0x03
+0657    0001F5  1720    	CP R18,R16
+0658    0001F6  0731    	CPC R19,R17
+0659    0001F7  B74F    	IN R20,SREG
+0660    0001F8  FF40    	SBRS R20,SREG_C
+0661    0001F9  C00A    	RJMP L0028
+0662    0001FA          ; 171: lambdaperiod = 0
+0663    0001FA  92F0    	STS 0x062,R15
+0663    0001FB  0062
+0664    0001FC  92F0    	STS 0x063,R15
+0664    0001FD  0063
+0665    0001FE          ; 172: lambdawait = 0
+0666    0001FE  92F0    	STS 0x06D,R15
+0666    0001FF  006D
+0667    000200  92F0    	STS 0x06E,R15
+0667    000201  006E
+0668    000202          ; 173: getlambda = True
+0669    000202  6094    	SBR 0x019,4
+0670    000203          ; 174: Else
+0671    000203  C014    	RJMP L0029
+0672    000204          L0028:
+0673    000204          ; 175: lambdaout = lambdaperiod
+0674    000204  9100    	LDS R16,0x062
+0674    000205  0062
+0675    000206  9300    	STS 0x06F,R16
+0675    000207  006F
+0676    000208  9100    	LDS R16,0x063
+0676    000209  0063
+0677    00020A  9300    	STS 0x070,R16
+0677    00020B  0070
+0678    00020C          ; 176: lambdawait = lambdawait + 1
+0679    00020C  9100    	LDS R16,0x06D
+0679    00020D  006D
+0680    00020E  9110    	LDS R17,0x06E
+0680    00020F  006E
+0681    000210  9503    	INC R16
+0682    000211  F409    	BRNE PC+2
+0683    000212  9513    	INC R17
+0684    000213  9300    	STS 0x06D,R16
+0684    000214  006D
+0685    000215  9310    	STS 0x06E,R17
+0685    000216  006E
+0686    000217          ; 177: PORTB.2 = False
+0687    000217  98C2    	CBI PORTB,2
+0688    000218          ; 178: Endif
+0689    000218          L0029:
+0690    000218          ; 179: 
+0691    000218          ; 180: Goto main_loop
+0692    000218  CE6C    	RJMP L0001
+0693    000219          ; 181: End
+0694    000219  CFFF    L0030	RJMP L0030
+0695    00021A          ; 182: 
+0696    00021A          ; 183: On Interrupt OC1A
+0697    00021A          L0003:
+0698    00021A  930F    	PUSH R16
+0699    00021B  B70F    	IN R16,SREG
+0700    00021C  930F    	PUSH R16
+0701    00021D  920F    	PUSH R0
+0702    00021E  92FF    	PUSH R15
+0703    00021F  930F    	PUSH R16
+0704    000220  931F    	PUSH R17
+0705    000221  932F    	PUSH R18
+0706    000222  933F    	PUSH R19
+0707    000223  934F    	PUSH R20
+0708    000224  935F    	PUSH R21
+0709    000225  936F    	PUSH R22
+0710    000226  93AF    	PUSH R26
+0711    000227  93BF    	PUSH R27
+0712    000228  93EF    	PUSH R30
+0713    000229  93FF    	PUSH R31
+0714    00022A          ; 184: 
+0715    00022A          ; 185: If lambda = True Then getlambda = False
+0716    00022A  9B45    	SBIS ACSR,5
+0717    00022B  C001    	RJMP L0031
+0718    00022C  7F9B    	CBR 0x019,4
+0719    00022D          L0031:
+0720    00022D          ; 186: 
+0721    00022D          ; 187: If getlambda = True Then
+0722    00022D  FF92    	SBRS 0x019,2
+0723    00022E  C00C    	RJMP L0032
+0724    00022F          ; 188: PORTB.2 = True
+0725    00022F  9AC2    	SBI PORTB,2
+0726    000230          ; 189: lambdaperiod = lambdaperiod + 1
+0727    000230  9100    	LDS R16,0x062
+0727    000231  0062
+0728    000232  9110    	LDS R17,0x063
+0728    000233  0063
+0729    000234  9503    	INC R16
+0730    000235  F409    	BRNE PC+2
+0731    000236  9513    	INC R17
+0732    000237  9300    	STS 0x062,R16
+0732    000238  0062
+0733    000239  9310    	STS 0x063,R17
+0733    00023A  0063
+0734    00023B          ; 190: Endif
+0735    00023B          L0032:
+0736    00023B          ; 191: 
+0737    00023B          ; 192: If pulse = 0 Then  'sensor detected
+0738    00023B  9982    	SBIC PIND,2
+0739    00023C  C016    	RJMP L0033
+0740    00023D          ; 193: If pulsehighwait = False Then  'ignore noise
+0741    00023D  FD91    	SBRC 0x019,1
+0742    00023E  C00D    	RJMP L0034
+0743    00023F          ; 194: pulsehighwait = True
+0744    00023F  6092    	SBR 0x019,2
+0745    000240          ; 195: pulseperiod = pulselow + 1
+0746    000240  E001    	LDI R16,0x01
+0747    000241  E010    	LDI R17,0x00
+0748    000242  0F07    	ADD R16,0x017
+0749    000243  1F18    	ADC R17,0x018
+0750    000244  9300    	STS 0x060,R16
+0750    000245  0060
+0751    000246  9310    	STS 0x061,R17
+0751    000247  0061
+0752    000248          ; 196: pulselow = 0
+0753    000248  E070    	LDI 0x017,0x00
+0754    000249  E080    	LDI 0x018,0x00
+0755    00024A          ; 197: pulsedisp = True
+0756    00024A  6091    	SBR 0x019,1
+0757    00024B          ; 198: Else
+0758    00024B  C006    	RJMP L0035
+0759    00024C          L0034:
+0760    00024C          ; 199: pulselow = pulselow + 1  'count period
+0761    00024C  E001    	LDI R16,0x01
+0762    00024D  E010    	LDI R17,0x00
+0763    00024E  0F07    	ADD R16,0x017
+0764    00024F  1F18    	ADC R17,0x018
+0765    000250  2F70    	MOV 0x017,R16
+0766    000251  2F81    	MOV 0x018,R17
+0767    000252          ; 200: Endif
+0768    000252          L0035:
+0769    000252          ; 201: Else
+0770    000252  C007    	RJMP L0036
+0771    000253          L0033:
+0772    000253          ; 202: pulselow = pulselow + 1  'count period
+0773    000253  E001    	LDI R16,0x01
+0774    000254  E010    	LDI R17,0x00
+0775    000255  0F07    	ADD R16,0x017
+0776    000256  1F18    	ADC R17,0x018
+0777    000257  2F70    	MOV 0x017,R16
+0778    000258  2F81    	MOV 0x018,R17
+0779    000259          ; 203: pulsehighwait = False
+0780    000259  7F9D    	CBR 0x019,2
+0781    00025A          ; 204: Endif
+0782    00025A          L0036:
+0783    00025A          ; 205: 
+0784    00025A          ; 206: 
+0785    00025A          ; 207: If spark = 1 Then  'ignition detected !!!
+0786    00025A  9B83    	SBIS PIND,3
+0787    00025B  C021    	RJMP L0037
+0788    00025C          ; 208: If rpmhighwait > 180 Then  'ignore noise
+0789    00025C  2F0C    	MOV R16,0x01C
+0790    00025D  2F1D    	MOV R17,0x01D
+0791    00025E  EB24    	LDI R18,0xB4
+0792    00025F  E030    	LDI R19,0x00
+0793    000260  1720    	CP R18,R16
+0794    000261  0731    	CPC R19,R17
+0795    000262  B74F    	IN R20,SREG
+0796    000263  FF40    	SBRS R20,SREG_C
+0797    000264  C00B    	RJMP L0038
+0798    000265          ; 209: rpmhighwait = 0
+0799    000265  E0C0    	LDI 0x01C,0x00
+0800    000266  E0D0    	LDI 0x01D,0x00
+0801    000267          ; 210: rpmperiod = rpmlow + 1
+0802    000267  E001    	LDI R16,0x01
+0803    000268  E010    	LDI R17,0x00
+0804    000269  0D0C    	ADD R16,0x00C
+0805    00026A  1D1D    	ADC R17,0x00D
+0806    00026B  2EA0    	MOV 0x00A,R16
+0807    00026C  2EB1    	MOV 0x00B,R17
+0808    00026D          ; 211: rpmlow = 0
+0809    00026D  2CCF    	MOV 0x00C,R15
+0810    00026E  2CDF    	MOV 0x00D,R15
+0811    00026F          ; 212: Else
+0812    00026F  C00C    	RJMP L0039
+0813    000270          L0038:
+0814    000270          ; 213: rpmlow = rpmlow + 1  'count period
+0815    000270  E001    	LDI R16,0x01
+0816    000271  E010    	LDI R17,0x00
+0817    000272  0D0C    	ADD R16,0x00C
+0818    000273  1D1D    	ADC R17,0x00D
+0819    000274  2EC0    	MOV 0x00C,R16
+0820    000275  2ED1    	MOV 0x00D,R17
+0821    000276          ; 214: 'rpmhighwait = 0
+0822    000276          ; 215: rpmhighwait = rpmhighwait + 1
+0823    000276  E001    	LDI R16,0x01
+0824    000277  E010    	LDI R17,0x00
+0825    000278  0F0C    	ADD R16,0x01C
+0826    000279  1F1D    	ADC R17,0x01D
+0827    00027A  2FC0    	MOV 0x01C,R16
+0828    00027B  2FD1    	MOV 0x01D,R17
+0829    00027C          ; 216: Endif
+0830    00027C          L0039:
+0831    00027C          ; 217: Else
+0832    00027C  C00C    	RJMP L0040
+0833    00027D          L0037:
+0834    00027D          ; 218: rpmlow = rpmlow + 1  'count period
+0835    00027D  E001    	LDI R16,0x01
+0836    00027E  E010    	LDI R17,0x00
+0837    00027F  0D0C    	ADD R16,0x00C
+0838    000280  1D1D    	ADC R17,0x00D
+0839    000281  2EC0    	MOV 0x00C,R16
+0840    000282  2ED1    	MOV 0x00D,R17
+0841    000283          ; 219: rpmhighwait = rpmhighwait + 1
+0842    000283  E001    	LDI R16,0x01
+0843    000284  E010    	LDI R17,0x00
+0844    000285  0F0C    	ADD R16,0x01C
+0845    000286  1F1D    	ADC R17,0x01D
+0846    000287  2FC0    	MOV 0x01C,R16
+0847    000288  2FD1    	MOV 0x01D,R17
+0848    000289          ; 220: Endif
+0849    000289          L0040:
+0850    000289          ; 221: 
+0851    000289          ; 222: 
+0852    000289          ; 223: 
+0853    000289          ; 224: Resume
+0854    000289  CD7B    	RJMP L0004
+0855    00028A          ; 225: 
+0856    00028A          ; End of user code
+0857    00028A  CFFF    L0041	RJMP L0041
+0858    00028B          ; APPEND CODE BEGIN: _routine_ascii_word_
+0859    00028B          _append_lab_0001:
+0860    00028B  E0E1    	LDI zl,0x01
+0861    00028C  2DFF    	MOV zh,r15
+0862    00028D  94E8    	clt
+0863    00028E  2D47    	MOV R20,0x007
+0864    00028F  2D58    	MOV R21,0x008
+0865    000290  E120    	LDI R18,0x10
+0866    000291  E237    	LDI R19,0x27
+0867    000292  D00D    	RCALL _append_lab_0002
+0868    000293  EE28    	LDI R18,0xE8
+0869    000294  E033    	LDI R19,0x03
+0870    000295  D00A    	RCALL _append_lab_0002
+0871    000296  E624    	LDI R18,0x64
+0872    000297  E030    	LDI R19,0x00
+0873    000298  D007    	RCALL _append_lab_0002
+0874    000299  E02A    	LDI R18,0x0A
+0875    00029A  E030    	LDI R19,0x00
+0876    00029B  D004    	RCALL _append_lab_0002
+0877    00029C  2E04    	MOV R0,R20
+0878    00029D  D009    	RCALL _append_lab_0003
+0879    00029E  82F0    	ST z,r15
+0880    00029F  9508    	RET
+0881    0002A0          _append_lab_0002:
+0882    0002A0  2F04    	MOV R16,R20
+0883    0002A1  2F15    	MOV R17,R21
+0884    0002A2  D008    	RCALL D001
+0885    0002A3  2E00    	MOV r0,r16
+0886    0002A4  100F    	CPSE r0,r15
+0887    0002A5  9468    	set
+0888    0002A6  F41E    	BRTC _append_lab_0004
+0889    0002A7          _append_lab_0003:
+0890    0002A7  E300    	LDI r16,0x30
+0891    0002A8  0E00    	ADD r0,r16
+0892    0002A9  9201    	ST z+,r0
+0893    0002AA          _append_lab_0004:
+0894    0002AA  9508    	RET
+0895    0002AB          ; APPEND CODE END.
+0896    0002AB          ;
+0897    0002AB          ;
+0898    0002AB          ; Word Division Routine
+0899    0002AB  2744    D001:	CLR R20
+0900    0002AC  1B55    	SUB R21,R21
+0901    0002AD  E161    	LDI R22,0x11
+0902    0002AE  1F00    D002:	ROL R16
+0903    0002AF  1F11    	ROL R17
+0904    0002B0  956A    	DEC R22
+0905    0002B1  F409    	BRNE D003
+0906    0002B2  9508    	RET
+0907    0002B3  1F44    D003:	ROL R20
+0908    0002B4  1F55    	ROL R21
+0909    0002B5  1B42    	SUB R20,R18
+0910    0002B6  0B53    	SBC R21,R19
+0911    0002B7  F420    	BRCC D004
+0912    0002B8  0F42    	ADD R20,R18
+0913    0002B9  1F53    	ADC R21,R19
+0914    0002BA  9488    	CLC
+0915    0002BB  CFF2    	RJMP D002
+0916    0002BC  9408    D004:	SEC
+0917    0002BD  CFF0    	RJMP D002
+0918    0002BE          ; Hardware Serial Communication Routines
+0919    0002BE  9B5D    HS01:	SBIS UCSRA,UDRE
+0920    0002BF  CFFE    	RJMP HS01
+0921    0002C0  B9FC    	OUT UDR,R31
+0922    0002C1  9508    	RET
+0923    0002C2  9B5F    HS10:	SBIS UCSRA,RXC
+0924    0002C3  CFFE    	RJMP HS10
+0925    0002C4  B1FC    	IN R31,UDR
+0926    0002C5  9508    	RET
+0927    0002C6          ; Hserout Decimal Conversion Routine
+0928    0002C6          HS22:
+0929    0002C6  01D0    	MOVW XH:XL,R1:R0
+0930    0002C7  91FD    HS21:	LD R31,X+
+0931    0002C8  010D    	MOVW R1:R0,XH:XL
+0932    0002C9  7FFF    	ANDI R31,0xFF
+0933    0002CA  F409    	BRNE PC+2
+0934    0002CB  9508    	RET
+0935    0002CC  DFF1    	RCALL HS01
+0936    0002CD  CFF8    	RJMP HS22
+0937    0002CE          ;
+0938    0002CE          ;
+0939    0002CE          ; End of listing
+0940    0002CE          .END
+---------------------------------------------
+Number of errors = 0

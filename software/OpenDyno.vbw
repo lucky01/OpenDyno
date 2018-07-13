@@ -1,0 +1,8 @@
+ClimateCorrection = -93, 152, 1230, 802, C, 271, 147, 1083, 759, C
+Main = -6, 11, 888, 823, C, 67, 34, 906, 660, C
+TransmissionCalc = 163, 144, 1165, 794, C, 22, 23, 834, 635, C
+Module1 = -25, 242, 977, 892, C
+DisplayResults = 94, 200, 1206, 833, C, 216, 127, 1053, 759, C
+ChartPrinterSheet = 175, 175, 976, 707, C, -2, -1, 802, 665, C
+ComparePrinterSheet = 175, 175, 976, 707, C, 186, 90, 1090, 863, C
+PrinterSheet = 175, 175, 976, 707, C, -21, 49, 847, 861, C
